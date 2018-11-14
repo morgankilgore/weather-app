@@ -23,8 +23,8 @@ python manage.py runserver
 **Host:** http://127.0.0.1:8000/weather
 
 #### Average temperature
-**URL:** /avg-temp
-**HTTP Method:** GET
+**URL:** /avg-temp	
+**HTTP Method:** GET	
 **Params:** 
 - latitude: *Required.* Latitude of location
 - longitude: *Required.* Longitude of location
