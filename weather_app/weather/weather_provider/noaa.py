@@ -24,6 +24,9 @@ class Noaa(object):
         if not is_valid_lat_lon(lat, lon):
             return False, 'Invalid latitude and/or longitude.'
 
-        data = get_request(self.url, {'latlon': '{},{}'.format(lat, lon)}, True)
+        ret, data = get_request(self.url, {'latlon': '{},{}'.format(lat, lon)})
+        if not ret:
+            return False, data
+
         current_temp = data.get('today').get('current').get(unit.lower())
         return True, current_temp

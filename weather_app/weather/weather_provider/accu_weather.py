@@ -24,6 +24,9 @@ class AccuWeather(object):
         if not is_valid_lat_lon(lat, lon):
             return False, 'Invalid latitude and/or longitude.'
 
-        data = get_request(self.url, {'latitude': float(lat), 'longitude': float(lon)}, True)
+        ret, data = get_request(self.url, {'latitude': float(lat), 'longitude': float(lon)})
+        if not ret:
+            return False, data
+
         current_temp = data.get('simpleforecast').get('forecastday')[0].get('current').get(unit.lower())
         return True, current_temp

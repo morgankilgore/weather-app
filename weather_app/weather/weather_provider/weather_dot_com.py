@@ -24,6 +24,9 @@ class WeatherDotCom(object):
         if not is_valid_lat_lon(lat, lon):
             return False, 'Invalid latitude and/or longitude.'
 
-        data = post_request(self.url, json_data={'lat': float(lat), 'lon': float(lon)}, to_dict=True)
+        ret, data = post_request(self.url, json_data={'lat': float(lat), 'lon': float(lon)})
+        if not ret:
+            return False, data
+
         current_temp = data.get('query').get('results').get('channel').get('condition').get('temp')
         return True, current_temp
